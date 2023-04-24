@@ -14,8 +14,7 @@ namespace EmployeeDetailsApp
         public EmployeeForm()
         {
             InitializeComponent();
-            var httpClient = new HttpClient();
-            repo = new EmployeeRepository(httpClient);
+            repo = new EmployeeRepository();
             employeeController = new EmployeeController(repo);
             GetData();
         }

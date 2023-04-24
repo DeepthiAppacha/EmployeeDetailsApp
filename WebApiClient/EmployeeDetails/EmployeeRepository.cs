@@ -9,9 +9,9 @@ namespace EmployeeDetailsApp.EmployeeDetails
         private readonly HttpClient client;
         private readonly string apiUrl = "https://gorest.co.in/public-api/users/";
 
-        public EmployeeRepository(HttpClient httpClient)
+        public EmployeeRepository()
         {
-            client = httpClient;
+            this.client = new HttpClient();
         }
 
         #region To Get All Employee Data

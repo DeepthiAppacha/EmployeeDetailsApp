@@ -6,12 +6,34 @@ namespace EmployeeTest.UnitTest
     [TestClass]
     public class EmployeeTest
     {
+        private EmployeeController employeeController;
+        private Mock<IEmployeeRepository> mockRepo;
+        private bool expectedResult;
+        private string id;
+        private string name;
+        private string email;
+        private string status;
+        private string gender;
+        private bool isUpdate;        
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            mockRepo = new Mock<IEmployeeRepository>();
+            employeeController = new EmployeeController(mockRepo.Object);
+            id = "42";
+            name = "Deepthi";
+            email = "dee@gmail.com";
+            status = "Active";
+            gender = "Female";
+        }
+
         /// <summary>
         /// To test get employee data
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public async Task GetEmployeeData()
+        public async Task GetEmployee_ReturnsDataComparision()
         {
             // Arrange           
             var expectedEmployee = new Employee();
@@ -26,10 +48,7 @@ namespace EmployeeTest.UnitTest
             usersList.Add(usersData);
             expectedEmployee.Data = usersList;
 
-            var mockRepo = new Mock<IEmployeeRepository>();
             mockRepo.Setup(x => x.GetEmployeeData()).ReturnsAsync(expectedEmployee);
-
-            var employeeController = new EmployeeController(mockRepo.Object);
 
             // Act
             var result = await employeeController.GetEmployeeData();
@@ -40,23 +59,30 @@ namespace EmployeeTest.UnitTest
         }
 
         /// <summary>
+        /// Test case to check invalid case
+        /// </summary>
+        /// <returns></returns>
+        [TestMethod]
+        public async Task GetEmployeeData_InvalidCase()
+        {
+            mockRepo.Setup(x => x.GetEmployeeData()).ThrowsAsync(new Exception("An error occurred."));
+
+            // Act and Assert
+            var ex = await Assert.ThrowsExceptionAsync<Exception>(() => employeeController.GetEmployeeData());
+            Assert.AreEqual("An error occurred.", ex.Message);
+        }
+
+        /// <summary>
         /// To test positive flow of create employee method
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public async Task CreateEmployee()
+        public async Task CreateEmployee_ReturnsTrue()
         {
             //Arrange
-            bool expectedResult = true;
-            var mockRepo = new Mock<IEmployeeRepository>();
-            string id = "42";
-            string name = "Deepthi";
-            string email = "dee@gmail.com";
-            string status = "Active";
-            string gender = "Female";
-            bool isUpdate = false;
+            expectedResult = true;
+            isUpdate = false;
             mockRepo.Setup(x => x.InsertEmployeeOrUpdate(id, name, email, status, gender, isUpdate)).ReturnsAsync(true);
-            var employeeController = new EmployeeController(mockRepo.Object);
 
             //Act            
             var actualResult = await employeeController.InsertEmployeeOrUpdate(id, name, email, status, gender, isUpdate);
@@ -64,6 +90,24 @@ namespace EmployeeTest.UnitTest
             //Assert
             Assert.AreEqual(expectedResult, actualResult);
 
+        }
+
+        /// <summary>
+        /// To test invalid case for create employee
+        /// </summary>
+        /// <returns></returns>
+        [TestMethod]
+        public async Task CreateEmployee_InvalidCase()
+        {
+            // Arrange           
+            isUpdate = false;
+            mockRepo.Setup(x => x.InsertEmployeeOrUpdate(id, name, email, status, gender, isUpdate)).ThrowsAsync(new Exception("An error occurred."));
+
+            // Act
+            var ex = await Assert.ThrowsExceptionAsync<Exception>(() => employeeController.InsertEmployeeOrUpdate(id, name, email, status, gender, isUpdate));
+
+            // Assert
+            Assert.AreEqual("An error occurred.", ex.Message);
         }
 
         /// <summary>
@@ -71,19 +115,12 @@ namespace EmployeeTest.UnitTest
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public async Task UpdateEmployee()
+        public async Task UpdateEmployee_ReturnsTrue()
         {
             //Arrange
-            bool expectedResult = true;
-            var mockRepo = new Mock<IEmployeeRepository>();
-            string id = "42";
-            string name = "Deepthi";
-            string email = "dee@gmail.com";
-            string status = "Active";
-            string gender = "Female";
-            bool isUpdate = true;
+            expectedResult = true;
+            isUpdate = true;
             mockRepo.Setup(x => x.InsertEmployeeOrUpdate(id, name, email, status, gender, isUpdate)).ReturnsAsync(true);
-            var employeeController = new EmployeeController(mockRepo.Object);
 
             //Act            
             var actualResult = await employeeController.InsertEmployeeOrUpdate(id, name, email, status, gender, isUpdate);
@@ -94,18 +131,52 @@ namespace EmployeeTest.UnitTest
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [TestMethod]
+        public async Task UpdateEmployee_InvalidCase()
+        {
+            // Arrange         
+            isUpdate = true;
+            mockRepo.Setup(x => x.InsertEmployeeOrUpdate(id, name, email, status, gender, isUpdate)).ThrowsAsync(new Exception("An error occurred."));
+
+            // Act
+            var ex = await Assert.ThrowsExceptionAsync<Exception>(() => employeeController.InsertEmployeeOrUpdate(id, name, email, status, gender, isUpdate));
+
+            // Assert
+            Assert.AreEqual("An error occurred.", ex.Message);
+        }
+
+        /// <summary>
         /// To test positive flow of delete employee
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public async Task DeleteEmployee()
+        public async Task DeleteEmployee_ReturnsTrue()
         {
             //Arrange
-            bool expectedResult = true;
-            var mockRepo = new Mock<IEmployeeRepository>();
-            string id = "42";
+            expectedResult = true;
             mockRepo.Setup(x => x.DeleteEmployeeData(id)).ReturnsAsync(true);
-            var employeeController = new EmployeeController(mockRepo.Object);
+
+            //Act            
+            var actualResult = await employeeController.DeleteEmployeeData(id);
+
+            //Assert
+            Assert.AreEqual(expectedResult, actualResult);
+
+        }
+
+        /// <summary>
+        /// To test delete employee for false case
+        /// </summary>
+        /// <returns></returns>
+        [TestMethod]
+        public async Task DeleteEmployee_ReturnsFalse()
+        {
+            //Arrange
+            expectedResult = false;
+            mockRepo.Setup(x => x.DeleteEmployeeData(id)).ReturnsAsync(false);
 
             //Act            
             var actualResult = await employeeController.DeleteEmployeeData(id);

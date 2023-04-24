@@ -49,30 +49,32 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 40F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(406, 9);
+            label1.Font = new Font("Segoe UI Semilight", 30F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(495, 9);
             label1.Name = "label1";
-            label1.Size = new Size(438, 72);
+            label1.Size = new Size(320, 54);
             label1.TabIndex = 0;
             label1.Text = "Employee Details";
             // 
             // employeeGrid
             // 
+            employeeGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            employeeGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             employeeGrid.BackgroundColor = SystemColors.ActiveCaption;
             employeeGrid.BorderStyle = BorderStyle.Fixed3D;
             employeeGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            employeeGrid.GridColor = SystemColors.ButtonShadow;
-            employeeGrid.Location = new Point(297, 84);
+            employeeGrid.GridColor = SystemColors.ActiveCaption;
+            employeeGrid.Location = new Point(226, 74);
             employeeGrid.Name = "employeeGrid";
             employeeGrid.RowTemplate.Height = 25;
-            employeeGrid.Size = new Size(613, 150);
+            employeeGrid.Size = new Size(885, 227);
             employeeGrid.TabIndex = 2;
             employeeGrid.RowHeaderMouseClick += EmployeeGrid_RowHeaderMouseClick;
             // 
             // labelId
             // 
             labelId.AutoSize = true;
-            labelId.Location = new Point(71, 261);
+            labelId.Location = new Point(178, 325);
             labelId.Name = "labelId";
             labelId.Size = new Size(18, 15);
             labelId.TabIndex = 3;
@@ -82,7 +84,7 @@
             // labelName
             // 
             labelName.AutoSize = true;
-            labelName.Location = new Point(71, 296);
+            labelName.Location = new Point(178, 371);
             labelName.Name = "labelName";
             labelName.Size = new Size(39, 15);
             labelName.TabIndex = 4;
@@ -91,7 +93,7 @@
             // labelGender
             // 
             labelGender.AutoSize = true;
-            labelGender.Location = new Point(71, 335);
+            labelGender.Location = new Point(178, 415);
             labelGender.Name = "labelGender";
             labelGender.Size = new Size(45, 15);
             labelGender.TabIndex = 5;
@@ -100,7 +102,7 @@
             // labelEmail
             // 
             labelEmail.AutoSize = true;
-            labelEmail.Location = new Point(71, 368);
+            labelEmail.Location = new Point(178, 458);
             labelEmail.Name = "labelEmail";
             labelEmail.Size = new Size(43, 15);
             labelEmail.TabIndex = 6;
@@ -109,7 +111,7 @@
             // labelStatus
             // 
             labelStatus.AutoSize = true;
-            labelStatus.Location = new Point(71, 408);
+            labelStatus.Location = new Point(178, 501);
             labelStatus.Name = "labelStatus";
             labelStatus.Size = new Size(39, 15);
             labelStatus.TabIndex = 7;
@@ -117,7 +119,7 @@
             // 
             // idTextBox
             // 
-            idTextBox.Location = new Point(180, 261);
+            idTextBox.Location = new Point(293, 317);
             idTextBox.Name = "idTextBox";
             idTextBox.Size = new Size(399, 23);
             idTextBox.TabIndex = 8;
@@ -125,35 +127,35 @@
             // 
             // nameTextBox
             // 
-            nameTextBox.Location = new Point(180, 296);
+            nameTextBox.Location = new Point(293, 363);
             nameTextBox.Name = "nameTextBox";
             nameTextBox.Size = new Size(399, 23);
             nameTextBox.TabIndex = 9;
             // 
             // genderTextBox
             // 
-            genderTextBox.Location = new Point(180, 335);
+            genderTextBox.Location = new Point(293, 407);
             genderTextBox.Name = "genderTextBox";
             genderTextBox.Size = new Size(399, 23);
             genderTextBox.TabIndex = 10;
             // 
             // mailTextBox
             // 
-            mailTextBox.Location = new Point(180, 368);
+            mailTextBox.Location = new Point(293, 450);
             mailTextBox.Name = "mailTextBox";
             mailTextBox.Size = new Size(399, 23);
             mailTextBox.TabIndex = 11;
             // 
             // statusTextBox
             // 
-            statusTextBox.Location = new Point(180, 408);
+            statusTextBox.Location = new Point(293, 493);
             statusTextBox.Name = "statusTextBox";
             statusTextBox.Size = new Size(399, 23);
             statusTextBox.TabIndex = 12;
             // 
             // Insert
             // 
-            Insert.Location = new Point(612, 375);
+            Insert.Location = new Point(786, 450);
             Insert.Name = "Insert";
             Insert.Size = new Size(105, 48);
             Insert.TabIndex = 13;
@@ -163,7 +165,7 @@
             // 
             // Update
             // 
-            Update.Location = new Point(740, 375);
+            Update.Location = new Point(943, 450);
             Update.Name = "Update";
             Update.Size = new Size(91, 48);
             Update.TabIndex = 14;
@@ -173,7 +175,7 @@
             // 
             // Delete
             // 
-            Delete.Location = new Point(856, 375);
+            Delete.Location = new Point(1080, 450);
             Delete.Name = "Delete";
             Delete.Size = new Size(91, 48);
             Delete.TabIndex = 15;
