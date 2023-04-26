@@ -27,7 +27,7 @@ namespace EmployeeDetailsApp.EmployeeDetails
 
             if (response.IsSuccessStatusCode)
             {
-                var userdata = await response.Content.ReadAsAsync<Employee>();
+                var userdata = await response.Content.ReadFromJsonAsync<Employee>();
                 return userdata;
             }
             else
